@@ -30,19 +30,19 @@ suic-20, as the first experimental application of Sui Inscriptions, has been cre
 * Create a suic-20 with the mint function:
 ```
 { 
-  "p": "suirc-20",
-  "op": "mint",
-  "tick": "suis",
-  "amt": "1000"
+  "p": "suirc-20", // Protocol: identify objects compliance with suirc-20
+  "op": "mint", // Operation: Type of event (Deploy, Mint, Transfer)
+  "tick": "suis", // Ticker: 4 letter identifier of the suirc-20
+  "amt": "1000" // Amount to mint: States the amount of the suirc-20 to mint. Has to be less than "lim" above if stated
 }
 ```
 * Create a suic-20 using the transfer function:
 ```
 { 
-  "p": "suirc-20",
-  "op": "transfer",
-  "tick": "suis",
-  "amt": "100"
+  "p": "suirc-20", // Protocol: identify objects compliance with suirc-20
+  "op": "transfer", // Operation: Type of event (Deploy, Mint, Transfer)
+  "tick": "suis", // Ticker: 4 letter identifier of the suirc-20
+  "amt": "100" // Amount to transfer: States the amount of the suirc-20 to transfer.
 }
 ```
 
