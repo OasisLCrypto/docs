@@ -26,6 +26,8 @@ To provide a clearer understanding of the suirc-20 standard, especially regardin
 
 3. **Shared Object:** All inscriptions created through the process in suirc-20 must be shared objects. This requirement is crucial to ensure the proper execution order of transactions. By using shared objects, the protocol can effectively maintain the sequence and consistency of mint operations across the network. This approach is key in managing concurrent transactions and preserving the integrity of the minting process in the Sui ecosystem.
 
+4. **String Format for Inscription Data:** The JSON data for each inscription must be converted into a string format and stored within the 'fields.inscription' field of the shared object.
+
 ### Operations in suirc-20
 
 
