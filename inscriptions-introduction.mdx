@@ -1,21 +1,50 @@
 ---
-title: 'Sui Inscriptions'
-description: 'introduction to sui inscriptions'
+title: 'Introducing Sui Inscriptions Protocol and suirc-20'
+description: 'A new approach to create and manage digital asserts on Sui'
 ---
 
-# Introduction to Sui Inscriptions
-
-## Understanding inscriptions
+### Understanding inscriptions
 Inscriptions are an innovative approach to decentralized storage and computing that stand apart from traditional contracts. They offer a fairer way to issue assets by using simple rules for data representation and processing. This not only makes the system more accessible but also opens up new possibilities for the growth of blockchain technology.
 
-Sui's advanced Object Model is designed to support inscriptions seamlessly, by adding a dedicated field to an Object for efficient management.
+Sui's advanced object model is able to support inscriptions seamlessly, by adding a dedicated field to an object for efficient management.
 
-## The Sui Inscriptions Standard
-The design of Sui's Object Model is very adaptable, allowing each Object to include various fields. This flexibility makes it easy and efficient to implement inscriptions with three key guidelines:
-1. An Inscription Object should have a specific 'inscriptions' field. This helps in better indexing and identifying the data.
+### Sui Inscription object
+The design of Sui's object model is very adaptable, allowing each object to include various fields. This flexibility makes it easy and efficient to implement inscriptions with three key guidelines:
+1. An inscription object should have a specific 'inscriptions' field. This helps in better indexing and identifying the data.
 2. The data for an inscription includes a content type (known as a MIME type) and the actual content, which is a series of bytes. This format allows for supporting diverse types of data.
-3. Sui's Object Model has different kinds of Objects, like Owned Objects, Immutable Objects, and Shared Objects. To make sure there is agreement on how inscriptions are created, every inscription needs to be a Shared Object.
 
-Objects that meet these guidelines are recognized as inscriptions. When such an Object is created, it becomes easier for indexers to identify and work with it.
+The ID for any created object is designated as the Sui inscription's ID. Those objects that meet these guidelines are recognized as inscriptions. When such an object is created, it becomes easier for indexers to identify and work with it.
 
-## How to Mint a Sui Inscription
+### suirc-20
+suic-20, as the first experimental application of Sui Inscriptions, has been created by referencing the brc-20 standard. suirc-20 similarly defines the following operations:
+* Create a suic-20 with the deploy function:
+```
+{ 
+  "p": "suirc-20", // Protocol: identify objects compliance with suirc-20
+  "op": "deploy", // Operation: Type of event (Deploy, Mint, Transfer)
+  "tick": "suis", // Ticker: 4 letter identifier of the suirc-20
+  "max": "21000000", // Max supply: set max supply of the suirc-20
+  "lim": "1000" // Mint limit: If letting users mint to themsleves, limit per inscription
+}
+```
+* Create a suic-20 with the mint function:
+```
+{ 
+  "p": "suirc-20",
+  "op": "mint",
+  "tick": "suis",
+  "amt": "1000"
+}
+```
+* Create a suic-20 using the transfer function:
+```
+{ 
+  "p": "suirc-20",
+  "op": "transfer",
+  "tick": "suis",
+  "amt": "100"
+}
+```
+
+Due to the Sui object model and consensus protocol supporting concurrent creation of inscriptions, within the same checkpoint of Sui, different validators may observe varying order of inscription creation. Thus, an additional rule is required: within a Sui checkpoint, the order of function operations should be sequenced based on the size of the inscription ID, to determine the validity of mint and transfer operations.
+

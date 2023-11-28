@@ -51,7 +51,7 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["inscriptions-introduction", "introduction", "quickstart", "development"]
+      "pages": ["inscriptions-introduction", "quickstart"]
     },
     {
       "group": "Essentials",
