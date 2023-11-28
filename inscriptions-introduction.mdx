@@ -15,36 +15,76 @@ The design of Sui's object model is very adaptable, allowing each object to incl
 
 The ID for any created object is designated as the Sui inscription's ID. Those objects that meet these guidelines are recognized as inscriptions. When such an object is created, it becomes easier for indexers to identify and work with it.
 
-### suirc-20
+
+
+### Operations in suirc-20
+
+
 suic-20, as the first experimental application of Sui Inscriptions, has been created by referencing the brc-20 standard. suirc-20 similarly defines the following operations:
-* Create a suic-20 with the deploy function:
-```
-{ 
-  "p": "suirc-20", // Protocol: identify objects compliance with suirc-20
-  "op": "deploy", // Operation: Type of event (Deploy, Mint, Transfer)
-  "tick": "suis", // Ticker: 4 letter identifier of the suirc-20
-  "max": "21000000", // Max supply: set max supply of the suirc-20
-  "lim": "1000" // Mint limit: If letting users mint to themsleves, limit per inscription
-}
-```
-* Create a suic-20 with the mint function:
-```
-{ 
-  "p": "suirc-20", // Protocol: identify objects compliance with suirc-20
-  "op": "mint", // Operation: Type of event (Deploy, Mint, Transfer)
-  "tick": "suis", // Ticker: 4 letter identifier of the suirc-20
-  "amt": "1000" // Amount to mint: States the amount of the suirc-20 to mint. Has to be less than "lim" above if stated
-}
-```
-* Create a suic-20 using the transfer function:
-```
-{ 
-  "p": "suirc-20", // Protocol: identify objects compliance with suirc-20
-  "op": "transfer", // Operation: Type of event (Deploy, Mint, Transfer)
-  "tick": "suis", // Ticker: 4 letter identifier of the suirc-20
-  "amt": "100" // Amount to transfer: States the amount of the suirc-20 to transfer.
+
+#### Deploy Function
+| Key  | Required | Description | Example |
+| ---- | -------- | ----------- | ------- |
+| p    | Yes      | Protocol: Identifies compliance with suirc-20 | `"p": "suirc-20"` |
+| op   | Yes      | Operation: Type of event (Deploy, Mint, Transfer) | `"op": "deploy"` |
+| tick | Yes      | Ticker: 4-letter identifier for suirc-20 | `"tick": "suis"` |
+| max  | Yes      | Max Supply: Sets the maximum supply of suirc-20 | `"max": "21000000"` |
+| lim  | No       | Mint Limit: Limits the number per inscription if users are allowed to mint | `"lim": "1000"` |
+
+**Example:**
+```json
+{
+  "p": "suirc-20",
+  "op": "deploy",
+  "tick": "suis",
+  "max": "21000000",
+  "lim": "1000"
 }
 ```
 
+
+#### Mint Function
+| Key  | Required | Description | Example |
+| ---- | -------- | ----------- | ------- |
+| p    | Yes      | Protocol: Identifies compliance with suirc-20 | `"p": "suirc-20"` |
+| op   | Yes      | Operation: Type of event (Deploy, Mint, Transfer) | `"op": "mint"` |
+| tick | Yes      | Ticker: 4-letter identifier for suirc-20 | `"tick": "suis"` |
+| amt  | Yes      | Amount to Mint: Specifies the amount of suirc-20 to mint | `"amt": "1000"` |
+
+**Example:**
+```json
+{
+  "p": "suirc-20",
+  "op": "mint",
+  "tick": "suis",
+  "amt": "1000"
+}
+```
+
+#### Transfer Function
+| Key  | Required | Description | Example |
+| ---- | -------- | ----------- | ------- |
+| p    | Yes      | Protocol: Identifies compliance with suirc-20 | `"p": "suirc-20"` |
+| op   | Yes      | Operation: Type of event (Deploy, Mint, Transfer) | `"op": "transfer"` |
+| tick | Yes      | Ticker: 4-letter identifier for suirc-20 | `"tick": "suis"` |
+| amt  | Yes      | Amount to Transfer: Specifies the amount of suirc-20 to transfer | `"amt": "100"` |
+| to   | Yes      | Address to Send To: Specifies the recipient's address for the transfer | `"to": "0x0418c3918bd47a8b74a495861f8cd89e2e50adf3bfa54861dbf5d9e725101573"` |
+
+**Example:**
+```json
+{
+  "p": "suirc-20",
+  "op": "transfer",
+  "tick": "suis",
+  "amt": "100",
+  "to": "0x0418c3918bd47a8b74a495861f8cd89e2e50adf3bfa54861dbf5d9e725101573"
+}
+```
+
+
 Due to the Sui object model and consensus protocol supporting concurrent creation of inscriptions, within the same checkpoint of Sui, different validators may observe varying order of inscription creation. Thus, an additional rule is required: within a Sui checkpoint, the order of function operations should be sequenced based on the size of the inscription ID, to determine the validity of mint and transfer operations.
+
+
+
+
 
