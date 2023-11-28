@@ -1,0 +1,34 @@
+---
+title: 'Indexer'
+description: 'Indexer indexing rules.'
+---
+
+Based on the brc-20 indexing rules, here's a set of indexing requirements tailored for the suirc20 standard:
+
+1. **Numeric Field Limitations:** For the numeric fields in the suirc20 protocol, the value range should be within the bounds of uint64_max. Additionally, in the JSON structure, these numeric values must be represented as strings. This approach ensures compatibility and precision in handling large numbers typically associated with blockchain transactions. By adhering to these guidelines, the suirc20 protocol maintains accuracy and consistency in its operations and data representations.
+
+2. **JSON Validation:** Inscriptions must be valid JSON. They should not contain trailing commas, and leading/trailing spaces or tabs are to be stripped.
+
+3. **Required JSON Fields:** 
+   - For 'deploy' operations: Must include "p", "op", "tick", "max". Optional fields are "lim" and "dec".
+   - For 'mint' and 'transfer' operations: Must include "p", "op", "tick", "amt". 
+   - For 'transfer' operations: The JSON must include the fields "p", "op", "tick", "amt", and "to".
+
+4. **Lower Case Requirement:** All operation and field names must be in lower case.
+
+5. **String Representation:** All necessary JSON fields, including numeric fields, must be strings.
+
+6. **Numeric Field Rules:** Numeric fields should not be stripped or trimmed. Decimal fields must have only digits and a single dot for decimal representation.
+
+7. **Ticker Rules:** The "tick" field must be 4 bytes wide in UTF-8 format. Ticker names are case-insensitive and should be processed in lower case.
+
+8. **Handling of Over-Limit and Invalid Transactions:** Transactions that exceed limits or are invalid according to the suirc20 rules should be ignored.
+
+9. **Balance Tracking and Inscription Rules:** Follow specific rules for tracking balances and handling inscriptions based on suirc20 operations.
+
+10. **Special Considerations:** 
+    - JavaScript indexers should use BigInt for precision.
+    - Careful handling of transactions sent as fees.
+    - Ticker length comparisons should not rely on string length due to UTF-8 character sizes.
+    - Numeric fields in JSON should use string representation.
+    - Be cautious of blockchain reorganizations as they can affect the order of transactions and hence balances.
