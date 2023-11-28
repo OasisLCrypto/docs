@@ -21,10 +21,6 @@
       "url": "mailto:hi@mintlify.com"
     }
   ],
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
-  },
 
   "anchors": [
     {
@@ -37,6 +33,10 @@
     {
       "group": "Introduction",
       "pages": ["introduction"]
+    },
+    {
+      "group": "Indexer",
+      "pages": ["indexer"]
     }
   ]
 }
