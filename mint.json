@@ -35,8 +35,8 @@
   ],
   "navigation": [
     {
-      "group": "Get Started",
-      "pages": ["inscriptions-introduction"]
+      "group": "Introduction",
+      "pages": ["introduction"]
     }
   ]
 }
