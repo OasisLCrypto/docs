@@ -12,6 +12,7 @@ Sui's advanced object model is able to support inscriptions seamlessly, by addin
 The design of Sui's object model is very adaptable, allowing each object to include various fields. This flexibility makes it easy and efficient to implement inscriptions with three key guidelines:
 1. An inscription object should have a specific 'inscriptions' field. This helps in better indexing and identifying the data.
 2. The data for an inscription includes a content type (known as a MIME type) and the actual content, which is a series of bytes. This format allows for supporting diverse types of data.
+3. Sui's object model has different kinds of objects, like owned objects, immutable objects, and shared objects. To make sure there is agreement on the order that inscriptions are created, every inscription needs to be a shared object.
 
 The ID for any created object is designated as the Sui inscription's ID. Those objects that meet these guidelines are recognized as inscriptions. When such an object is created, it becomes easier for indexers to identify and work with it.
 
@@ -92,7 +93,3 @@ suic-20, as the first experimental application of Sui Inscriptions, has been cre
   "to": "0x0418c3918bd47a8b74a495861f8cd89e2e50adf3bfa54861dbf5d9e725101573"
 }
 ```
-
-
-Due to the Sui object model and consensus protocol supporting concurrent creation of inscriptions, within the same checkpoint of Sui, different validators may observe varying order of inscription creation. Thus, an additional rule is required: within a Sui checkpoint, the order of function operations should be sequenced based on the size of the inscription ID, to determine the validity of mint and transfer operations.
-
