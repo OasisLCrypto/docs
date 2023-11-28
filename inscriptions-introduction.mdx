@@ -1,0 +1,21 @@
+---
+title: 'Sui Inscriptions'
+description: 'introduction to sui inscriptions'
+---
+
+# Introduction to Sui Inscriptions
+
+## Understanding inscriptions
+Inscriptions are an innovative approach to decentralized storage and computing that stand apart from traditional contracts. They offer a fairer way to issue assets by using simple rules for data representation and processing. This not only makes the system more accessible but also opens up new possibilities for the growth of blockchain technology.
+
+Sui's advanced Object Model is designed to support inscriptions seamlessly, by adding a dedicated field to an Object for efficient management.
+
+## The Sui Inscriptions Standard
+The design of Sui's Object Model is very adaptable, allowing each Object to include various fields. This flexibility makes it easy and efficient to implement inscriptions with three key guidelines:
+1. An Inscription Object should have a specific 'inscriptions' field. This helps in better indexing and identifying the data.
+2. The data for an inscription includes a content type (known as a MIME type) and the actual content, which is a series of bytes. This format allows for supporting diverse types of data.
+3. Sui's Object Model has different kinds of Objects, like Owned Objects, Immutable Objects, and Shared Objects. To make sure there is agreement on how inscriptions are created, every inscription needs to be a Shared Object.
+
+Objects that meet these guidelines are recognized as inscriptions. When such an Object is created, it becomes easier for indexers to identify and work with it.
+
+## How to Mint a Sui Inscription
