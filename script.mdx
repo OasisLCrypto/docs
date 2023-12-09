@@ -1,0 +1,76 @@
+---
+title: 'Script'
+description: 'How to use the batch minting script.'
+---
+
+
+
+
+
+# SUIRC-20 Batch Minting Script Usage Guide
+
+This document provides instructions on how to use the batch minting script for the Sui blockchain using TypeScript and Sui TypeScript SDK. This script automates the process of minting tokens multiple times in a batch.
+
+# Prerequisites
+
+Before you can run the script, ensure you have the following prerequisites:
+
+- Node.js: Install Node.js (including npm) from Node.js Official Website.
+
+# Installation
+
+- Clone or download the script to your local machine.
+
+```
+git clone https://github.com/suimint/script.git
+cd script
+  ```
+
+- Install necessary dependencies by running:
+
+```
+npm install
+  ```
+
+# Preparing the Private Key
+
+Store your private key in a file named private-key.txt in the same directory as the script. This key is used to authenticate transactions on the Sui network. Ensure this file is kept secure and not shared.
+
+# Running the Script
+
+To run the script, use the following command structure:
+
+```
+ts-node mint.ts <amount> <tick> <times>
+```
+
+- `amount`: The amount of the token to mint per operation. This should be equal to the tick's deploy configuration.
+- `tick`: The tick (identifier) of the token you wish to mint.
+- `times`: The number of times you want to mint the specified amount of tokens.
+
+# Example
+
+To mint 10 units of a token with the tick "test" for 100 times, use the following command:
+
+```
+ts-node mint.ts 10 test 100
+```
+
+Upon successful execution, the script will output the details of each transaction, including the total amount of tokens minted and the transaction IDs. For example:
+
+```
+$ ts-node mint.ts 10 test 100
+Minting 10 tokens with tick test 100 times
+Total amount: 1000
+Transaction 1 successful: 45P9JbkAa8yQBdwtLZpynwMCoAMUrcP3Uy4UjPnFSpbT
+...
+Transaction 100 successful: F2cQEptHhfHN6dbMKVwoTS9zfZqgrRtbgZCTdEYwyP4y
+```
+
+# Security and Considerations
+
+- **Private Key Security**: The private key file (private-key.txt) should be kept secure and confidential.
+- **PackageID**: Users need to replace the `SUIRC20` package on `line 14` on `mint.ts` .
+- **Error Handling**: The script includes basic error handling. Monitor the output for any errors or failed transactions.
+- **Testing**: It is recommended to thoroughly test the script in a test environment before running it on the main network.
+

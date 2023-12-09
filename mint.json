@@ -29,8 +29,20 @@
       "pages": ["introduction"]
     },
     {
+      "group": "MarketPlace",
+      "pages": ["marketplace"]
+    },
+    {
+      "group": "Tutorial",
+      "pages": ["tutorial"]
+    },
+    {
       "group": "Indexer",
       "pages": ["indexer"]
+    },
+    {
+      "group": "Script",
+      "pages": ["script"]
     }
   ]
 }
