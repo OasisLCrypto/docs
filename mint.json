@@ -33,6 +33,10 @@
       "pages": ["indexer"]
     },
     {
+      "group": "Marketplace",
+      "pages": ["marketplace"]
+    },
+    {
       "group": "Script",
       "pages": ["script"]
     },

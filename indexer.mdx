@@ -32,3 +32,184 @@ Based on the brc-20 indexing rules, here's a set of indexing requirements tailor
     - Ticker length comparisons should not rely on string length due to UTF-8 character sizes.
     - Numeric fields in JSON should use string representation.
     - Be cautious of blockchain reorganizations as they can affect the order of transactions and hence balances.
+
+
+**GraphQL-API:**
+
+Testnet: https://api-testnet.suirc20.com/query/
+
+Mainnet: [https://api.suirc20.com/](https://api-testnet.suirc20.com/)query/
+
+# Query-Request:
+
+## Query  Tick  Balance By User :
+
+```GraphQL
+query balanceIfExist($owner: String!, $tick: String!) {
+   balances (where: { owner: $owner, tick: $tick}) {
+      edges {
+         node {
+            protocol
+            owner
+            balance
+            tick
+         }
+      }
+   }
+}
+```
+
+## Query Mint Freq Status :
+
+```GraphQL
+query mintFreqAllowed($tick: String!) {
+    tokens(where: {tick: $tick}) {
+        edges {
+            node {
+                id
+                max
+                protocol
+                limit
+                fee
+                frequency
+                currentMinuteMintedCount
+            }
+        }
+    }
+}
+```
+
+## Query Operation Execution status :
+
+```GraphQL
+query operationIfSucceed($txDigest: String!) {
+    operations(where: {txDigest: $txDigest}) {
+        edges {
+            node {
+                id
+                max
+                protocol
+                limit
+                createdAt
+                owner
+                inscription
+            }
+        }
+    }
+}
+```
+
+## Query tick status :
+
+```GraphQL
+query tickIfExist($tick: String!) {
+    tokens(where: {tick: $tick}) {
+        edges {
+            node {
+                id
+                max
+                protocol
+                limit
+                fee
+            }
+        }
+    }
+}
+```
+
+## Query tick info by tick name :
+
+```GraphQL
+query token_info {
+  tokens(where: {tick: $tick}) {
+    edges {
+      node {
+        id
+        protocol
+        tick
+        decimals
+        max
+        limit
+      }
+    }
+  }
+}
+```
+
+## Query user balance for all ticks :
+
+```GraphQL
+query UserBalance($owner: String!) {
+  balances (where: {owner: $owner}){
+    edges {
+      node {
+        protocol
+        owner
+        balance
+        tick
+      }
+    }
+  }
+}
+```
+
+## Query Transfer Record By tick name
+
+```GraphQL
+query TokenTransfer($first: Int!, $after: Cursor, $tick: String) {
+  operations(
+    first: $first, after: $after,
+    where: {operationIn: [transfer, transfer_from] ,and :{ tick: $tick }}
+    orderBy: {direction: DESC, field: CREATED_AT}
+  ) {
+    totalCount
+    edges {
+      cursor
+      node {
+        id
+        protocol
+        operation
+        tick
+        decimals
+        max
+        amount
+        limit
+        fee
+        txDigest
+        owner
+        to
+        from
+        share
+        pick
+        status
+        inscription
+        createdAt
+      }
+    }
+  }
+}
+```
+
+## Query holders data by tick
+
+```GraphQL
+query TokenHolders($first: Int!, $after: Cursor, $tick: String) {
+  balances(
+    orderBy: {field: BALANCE, direction: DESC},
+    where: {tick: $tick},
+    first: $first, after: $after
+  ) {
+    edges {
+      node {
+        balance
+        id
+        owner
+        protocol
+        tick
+      }
+      cursor
+    }
+    totalCount
+  }
+}
+```
